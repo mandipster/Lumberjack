@@ -1,14 +1,21 @@
 import re
 from collections import Counter
 import logging
+import argparse
 
 # Configure logging
 logging.basicConfig(filename='security_analysis.log', level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
 
 def parse_apache_log(log_file):
-    """
-    Parse Apache access log file and extract relevant information.
-    """
+
+    # Parse Apache access log file and extract relevant information.
+
+    # Args:
+    #     log_file (str): Path to the Apache access log file.
+
+    # Returns:
+    #     list: A list of dictionaries containing parsed log entries.
+    
     log_entries = []
     pattern = r'(\d+\.\d+\.\d+\.\d+) - - \[([^\]]+)\] "(GET|POST) ([^"]+)" (\d+) (\d+)'
     try:
@@ -41,9 +48,15 @@ def parse_apache_log(log_file):
     return log_entries
 
 def analyze_log(log_entries):
-    """
-    Analyze parsed log entries for security threats.
-    """
+
+    # Analyze parsed log entries for security threats.
+
+    # Args:
+    #     log_entries (list): A list of dictionaries containing parsed log entries.
+
+    # Returns:
+    #     list: A list of security issues found during analysis.
+
     security_issues = []
     try:
         for entry in log_entries:
@@ -86,9 +99,15 @@ def analyze_log(log_entries):
     return security_issues
 
 def generate_report(security_issues):
-    """
-    Generate a report summarizing analysis results.
-    """
+
+    # Generate a report summarizing analysis results.
+
+    # Args:
+    #     security_issues (list): A list of security issues found during analysis.
+
+    # Returns:
+    #     str: A string containing the security analysis report.
+
     report = "Security Analysis Report:\n\n"
     
     if security_issues:
@@ -104,6 +123,9 @@ def generate_report(security_issues):
 
 # Main function
 def main():
+
+    # Main function to parse Apache access log, analyze for security threats, and generate a report.
+
     try:
         # Parse log file
         apache_log_file = 'Lumberjack/samples/sample1_access.log'
