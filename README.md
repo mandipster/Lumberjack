@@ -26,7 +26,3 @@ python main.py sample_access.log
 - Since we’re not using real locations, geographical analysis on IP addresses is not performed.
 
 - We wanted to integrate with SIEM, but there was an issue when porting over the HEC URL. We will need to study it more to resolve the issue.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
