@@ -1,27 +1,32 @@
-Security Log Analysis Script
+## Lumberjack (Log Analysis)
 
-Overview:
-This Python script is designed to parse and analyze log files from web servers, such as Apache, to detect potential security threats and generate comprehensive reports with actionable insights. It leverages regular expressions for precise data extraction and customizable analysis rules to flag suspicious activity.
+This project is a simple tool for parsing Apache access log files, analyzing them for security threats, and generating a report summarizing the analysis results.
 
-Features:
-- Automated log file parsing and analysis for rapid threat detection and response.
-- Integration of regular expressions to extract relevant information from log entries efficiently.
-- Customizable analysis rules to flag potential security issues, including unauthorized access attempts and server errors.
-- Generation of detailed reports summarizing analysis results and security threats.
-- Scalability and adaptability to diverse log formats and data sources.
+## Usage
 
-Usage:
-1. Ensure Python is installed on your system.
-2. Clone the repository or download the script file (`main.py`).
-3. Run the script with the following command:
-    ```
-    python main.py <log_file_path>
-    ```
-    Replace `<log_file_path>` with the path to your Apache access log file.
+To use this tool, follow these steps:
 
-Note:
-- Since we're not using real locations, geographical analysis on IP addresses is not performed.
-- Integration with SIEM (Security Information and Event Management) systems was attempted, but there was an issue when porting over the HEC (HTTP Event Collector) URL. Further investigation is required to resolve this issue.
+1. Make sure you have Python installed on your system.
+2. Clone the project repository
+3. Navigate to the project directory
+4. Run the main script with the path to your Apache access log file as an argument:
+python main.py "log_file_path"
 
-License:
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Replace "log_file_path" with the path to your Apache access log file.
+
+## Example
+
+Here's an example of how to run the script:
+
+python main.py sample_access.log
+
+
+## Notes
+
+- Since we’re not using real locations, geographical analysis on IP addresses is not performed.
+
+- We wanted to integrate with SIEM, but there was an issue when porting over the HEC URL. We will need to study it more to resolve the issue.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
