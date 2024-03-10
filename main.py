@@ -1,23 +1,16 @@
 import re
 from collections import Counter
-import logging
 import argparse
+import logging
 
-# Configure logging
-logging.basicConfig(filename='security_analysis.log', level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
 
 def parse_apache_log(log_file):
-
-    # Parse Apache access log file and extract relevant information.
-
-    # Args:
-    #     log_file (str): Path to the Apache access log file.
-
-    # Returns:
-    #     list: A list of dictionaries containing parsed log entries.
-    
+    """
+    Parse Apache access log file and extract relevant information.
+    """
     log_entries = []
     pattern = r'(\d+\.\d+\.\d+\.\d+) - - \[([^\]]+)\] "(GET|POST) ([^"]+)" (\d+) (\d+)'
+    
     try:
         with open(log_file, 'r') as file:
             for line in file:
@@ -48,15 +41,9 @@ def parse_apache_log(log_file):
     return log_entries
 
 def analyze_log(log_entries):
-
-    # Analyze parsed log entries for security threats.
-
-    # Args:
-    #     log_entries (list): A list of dictionaries containing parsed log entries.
-
-    # Returns:
-    #     list: A list of security issues found during analysis.
-
+    """
+    Analyze parsed log entries for security threats.
+    """
     security_issues = []
     try:
         for entry in log_entries:
@@ -83,7 +70,7 @@ def analyze_log(log_entries):
                 security_issues.append(f"Service unavailable: {entry['url']} accessed by {entry['ip_address']}")
             elif entry['status_code'] == '504':
                 security_issues.append(f"Gateway timeout: {entry['url']} accessed by {entry['ip_address']}")
-            
+        
         # Extract IP addresses from log entries
         ip_addresses = [entry['ip_address'] for entry in log_entries]
         # Count occurrences of each IP address
@@ -99,15 +86,9 @@ def analyze_log(log_entries):
     return security_issues
 
 def generate_report(security_issues):
-
-    # Generate a report summarizing analysis results.
-
-    # Args:
-    #     security_issues (list): A list of security issues found during analysis.
-
-    # Returns:
-    #     str: A string containing the security analysis report.
-
+    """
+    Generate a report summarizing analysis results.
+    """
     report = "Security Analysis Report:\n\n"
     
     if security_issues:
@@ -121,15 +102,17 @@ def generate_report(security_issues):
     
     return report
 
-# Main function
 def main():
+    parser = argparse.ArgumentParser(description='Parse Apache access log and analyze for security threats.')
+    parser.add_argument('log_file', metavar='LOG_FILE', type=str, help='Path to the Apache access log file')
+    args = parser.parse_args()
 
-    # Main function to parse Apache access log, analyze for security threats, and generate a report.
+    # Configure logging
+    logging.basicConfig(filename='security_analysis.log', level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
 
     try:
         # Parse log file
-        apache_log_file = 'Lumberjack/samples/sample1_access.log'
-        parsed_entries = parse_apache_log(apache_log_file)
+        parsed_entries = parse_apache_log(args.log_file)
         
         # Analyze log data
         security_issues = analyze_log(parsed_entries)
@@ -143,5 +126,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
